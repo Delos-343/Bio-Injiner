@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css'
-import { Navbar } from './components'
+import { Navbar, TableList } from './components'
 
 function App() {
   return (
     <>
       <Navbar />
+      <TableList />
     </>
   )
 }

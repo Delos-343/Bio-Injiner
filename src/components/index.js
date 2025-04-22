@@ -1,3 +1,4 @@
 import Navbar from "./Navbar";
+import TableList from "./TableList";
 
-export { Navbar }
+export { Navbar, TableList }
