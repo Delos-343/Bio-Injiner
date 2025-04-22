@@ -1,12 +1,11 @@
 import React from 'react'
 import './App.css'
+import { Navbar } from './components'
 
 function App() {
   return (
     <>
-      <div className="text-6xl font-bold underline">
-        <h1> Hello World </h1>
-      </div>
+      <Navbar />
     </>
   )
 }
