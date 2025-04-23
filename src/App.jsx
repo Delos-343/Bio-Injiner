@@ -1,12 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import { Navbar, TableList } from './components'
+import { Modal, Navbar, TableList } from './components'
 
 function App() {
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [modalMode, setmodalMode] = useState('add')
+
+  const handleOpen = (mode) => {
+
+    setIsOpen(true)
+
+  }
+
+  const handleSubmit = () => {
+
+    if(modalMode === 'add') {
+
+      console.log('Add to Modal')
+
+    } else {
+
+      console.log('Edit Modal')
+
+    }
+  }
+
   return (
     <>
-      <Navbar />
+      <Navbar onOpen={() => handleOpen('add')} />
       <TableList />
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   )
 }
