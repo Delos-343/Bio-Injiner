@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Navbar = () => {
+const Navbar = ({ onOpen }) => {
   return (
     <>    
       <div className="navbar bg-base-100 shadow-sm">
@@ -11,6 +11,11 @@ const Navbar = () => {
           <input type="text" placeholder="Search" className="input input-bordered w-full md:w-auto" />
         </div>
         <div className="navbar-end">
+          <div className="form-control mx-5">
+            <a className="btn btn-ghost btn-circle text-xl" onClick={onOpen}>
+              ⨮
+            </a>
+          </div>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
@@ -25,7 +30,9 @@ const Navbar = () => {
               <li>
                 <a className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  <span className="badge">
+                    ✓
+                  </span>
                 </a>
               </li>
               <li><a>Settings</a></li>
