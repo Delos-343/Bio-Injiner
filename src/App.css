@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cyberpunk;
+  themes: light --default, dark --prefersdark, synthwave --synthwave, forest --forest, retro --retro, cyberpunk --cyberpunk, business --business, corporate --corporate, fantasy --fantasy, emerald --emerald, luxury --luxury, dracula --dracula;
 }
 
 :root {
