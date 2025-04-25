@@ -2,7 +2,8 @@ import React from 'react'
 
 /**
  * A responsive table listing items with title, publisher, truncated description, status, and actions.
- * Covers full width of the viewport with smooth, rounded header styling.
+ * Covers full width of the viewport with smooth, rounded header styling and accent-colored header line.
+ * Ensures cells wrap and are responsive to prevent overlap.
  * Props:
  * - handleOpen: (mode: string, item?: object) => void, callback to open modal in a given mode with optional item data
  */
@@ -19,92 +20,92 @@ const TableList = ({ handleOpen }) => {
     { id: 7, title: "Linear Algebra II", publisher: "Khalid Barelvi", description: "Explores inner product spaces, orthogonality, spectral theorems, and canonical forms such as Jordan and singular value decompositions.", isActive: true },
   ];
 
+  // Truncate description to a max number of words
   const truncateWords = (text, maxWords) => {
-
+    
     const words = text.split(/\s+/);
 
     if (words.length <= maxWords) return text;
 
     return words.slice(0, maxWords).join(' ') + '...';
-
   }
 
   return (
-    <>
-      <section className="w-full px-4 my-16">
-        <div className="overflow-x-auto w-full">
-            <div className="overflow-hidden rounded-lg shadow-sm">
-            <table className="table table-fixed w-full border-collapse">
-                <thead>
+    <section className="w-full px-4 mt-12">
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full">
+          <div className="overflow-hidden rounded-lg shadow-sm">
+            <table className="table-auto w-full border-collapse">
+              <thead className="bg-base-100/30 border-b-2 border-accent-content/50">
                 <tr>
-                    <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50 first:rounded-tl-lg last:rounded-tr-lg">
-                        Title <br />
-                    </th>
-                    <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50">
-                        Publisher <br />
-                    </th>
-                    <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50">
-                        Description <br />
-                    </th>
-                    <th className="px-4 py-2 text-center bg-base-100 border-b border-gray-200 border-opacity-50">
-                        Status <br />
-                    </th>
-                    <th className="px-4 py-2 text-center bg-base-100 border-b border-gray-200 border-opacity-50 first:rounded-tr-lg last:rounded-tr-lg">
-                        Actions <br />
-                    </th>
+                  <th className="p-4 text-left text-gray-300 break-words first:rounded-tl-lg">
+                    Title
+                  </th>
+                  <th className="p-4 text-left text-gray-300 break-words">
+                    Publisher
+                  </th>
+                  <th className="p-4 text-left text-gray-300 break-words">
+                    Description
+                  </th>
+                  <th className="p-4 text-center text-gray-300">
+                    Status
+                  </th>
+                  <th className="p-4 text-center text-gray-300 last:rounded-tr-lg">
+                    Actions
+                  </th>
                 </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
                 {items.map(item => (
-                    <tr key={item.id} className="hover:bg-base-300">
-                    <td className="px-4 py-3 whitespace-nowrap">
-                        <button
-                        className="text-blue-600 hover:underline cursor-pointer"
+                  <tr key={item.id} className="hover:bg-base-300">
+                    <td className="px-4 py-3 whitespace-normal break-words min-w-0">
+                      <button
+                        className="text-blue-300 hover:underline font-light cursor-pointer"
                         onClick={() => handleOpen('view', item)}
                         aria-label={`View details for ${item.title}`}
-                        >
+                      >
                         {item.title}
-                        </button>
+                      </button>
                     </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
-                        {item.publisher}
+                    <td className="px-4 py-3 whitespace-normal break-words min-w-0">
+                      {item.publisher}
                     </td>
-                    <td className="px-4 py-3">
-                        {truncateWords(item.description, 13)}
+                    <td className="px-4 py-3 whitespace-normal break-words">
+                      {truncateWords(item.description, 13)}
                     </td>
                     <td className="px-4 py-3 text-center">
-                        <button
-                        className={`btn btn-sm rounded-full w-8 h-8 m-auto ${
-                            item.isActive ? 'btn-primary' : 'btn-outline'
+                      <button
+                        className={`btn btn-sm rounded-full w-8 h-8 m-auto whitespace-normal ${
+                          item.isActive ? 'btn-primary' : 'btn-outline'
                         }`}
                         aria-label={item.isActive ? 'Active' : 'Inactive'}
-                        >
-                            {item.isActive ? '✓' : '✗'}
-                        </button>
+                      >
+                        {item.isActive ? '✓' : '✗'}
+                      </button>
                     </td>
-                    <td className="px-4 py-3 text-center space-x-2">
-                        <button
+                    <td className="px-4 py-3 text-center space-x-2 whitespace-normal">
+                      <button
                         onClick={() => handleOpen('edit', item)}
                         className="btn btn-ghost text-green-500"
                         aria-label={`Edit ${item.title}`}
-                        >
+                      >
                         Edit
-                        </button>
-                        <button
+                      </button>
+                      <button
                         className="btn btn-ghost text-red-600"
                         aria-label={`Delete ${item.title}`}
-                        >
+                      >
                         Delete
-                        </button>
+                      </button>
                     </td>
-                    </tr>
+                  </tr>
                 ))}
-                </tbody>
+              </tbody>
             </table>
-            </div>
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
