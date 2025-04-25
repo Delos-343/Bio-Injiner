@@ -57,7 +57,7 @@ const TableList = ({ handleOpen }) => {
               </thead>
               <tbody>
                 {items.map(item => (
-                  <tr key={item.id} className="hover:bg-base-300">
+                  <tr key={item.id} className="hover:bg-base-300 text-sm">
                     <td className="px-4 py-3 whitespace-normal break-words min-w-0">
                       <button
                         className="text-blue-300 hover:underline font-light cursor-pointer"
