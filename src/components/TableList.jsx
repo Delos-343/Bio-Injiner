@@ -38,19 +38,19 @@ const TableList = ({ handleOpen }) => {
                 <thead>
                 <tr>
                     <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50 first:rounded-tl-lg last:rounded-tr-lg">
-                    Title
+                        Title <br />
                     </th>
                     <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50">
-                    Publisher
+                        Publisher <br />
                     </th>
                     <th className="px-4 py-2 text-left bg-base-100 border-b border-gray-200 border-opacity-50">
-                    Description
+                        Description <br />
                     </th>
                     <th className="px-4 py-2 text-center bg-base-100 border-b border-gray-200 border-opacity-50">
-                    Status
+                        Status <br />
                     </th>
                     <th className="px-4 py-2 text-center bg-base-100 border-b border-gray-200 border-opacity-50 first:rounded-tr-lg last:rounded-tr-lg">
-                    Actions
+                        Actions <br />
                     </th>
                 </tr>
                 </thead>
