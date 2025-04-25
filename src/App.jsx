@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <Navbar onOpen={() => handleOpen('add')} />
-      <TableList />
+      <TableList handleOpen={handleOpen} />
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   )
