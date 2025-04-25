@@ -1,11 +1,19 @@
 import React from 'react'
 
+/**
+ * A responsive navigation bar with brand, full-width search input, and user/action controls.
+ * Props:
+ * - onOpen: () => void, callback for opening the sidebar/modal
+ */
+
 const Navbar = ({ onOpen }) => {
   return (
     <>    
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar bg-base-100 shadow-sm justify-between items-center px-4 py-2">
         <div className="navbar-start">
-          <a className="btn btn-ghost text-xl"> BioInjiner </a>
+          <a className="btn btn-ghost text-xl">
+            BioInjiner
+          </a>
         </div>
         <div className="navbar-center">
           <input type="text" placeholder="Search" className="input input-bordered w-full md:w-auto" />
@@ -26,7 +34,7 @@ const Navbar = ({ onOpen }) => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box border border-accent-content z-1 mt-3 w-52 p-2 shadow">
               <li>
                 <a className="justify-between">
                   Profile
@@ -35,14 +43,17 @@ const Navbar = ({ onOpen }) => {
                   </span>
                 </a>
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li>
+                <a>
+                  Logout
+                </a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
