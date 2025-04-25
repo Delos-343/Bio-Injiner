@@ -11,7 +11,7 @@ const Navbar = ({ onOpen }) => {
     <>    
       <div className="navbar bg-base-100 shadow-sm justify-between items-center px-4 py-2">
         <div className="navbar-start">
-          <a className="btn btn-ghost text-xl">
+          <a className="btn btn-ghost text-xl text-blue-300">
             BioInjiner
           </a>
         </div>
