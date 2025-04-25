@@ -17,7 +17,7 @@ const TableList = ({ handleOpen }) => {
     { id: 5, title: "Calculus — Differentiation", publisher: "Hasi", description: "Measures the instantaneous rate of change of a function, representing the slope of the tangent line at a given point and serving as a fundamental tool in physics and optimization.", isActive: false },
     { id: 6, title: "Calculus — Integration", publisher: "Hasi", description: "Continuous analog of a sum, used to calculate areas under curves, volumes, and other aggregated quantities by accumulating infinitesimal contributions.", isActive: false },
     { id: 7, title: "Linear Algebra II", publisher: "Khalid Barelvi", description: "Explores inner product spaces, orthogonality, spectral theorems, and canonical forms such as Jordan and singular value decompositions.", isActive: true },
-  ]
+  ];
 
   const truncateWords = (text, maxWords) => {
 

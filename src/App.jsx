@@ -4,13 +4,13 @@ import { Modal, Navbar, TableList } from './components'
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [modalMode, setmodalMode] = useState('add')
+  const [modalMode, setmodalMode] = useState('add');
 
   const handleOpen = (mode) => {
 
-    setIsOpen(true)
+    setIsOpen(true);
 
   }
 
@@ -18,11 +18,11 @@ function App() {
 
     if(modalMode === 'add') {
 
-      console.log('Add to Modal')
+      console.log('Add to Modal');
 
     } else {
 
-      console.log('Edit Modal')
+      console.log('Edit Modal');
 
     }
   }
@@ -36,4 +36,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
