@@ -59,7 +59,7 @@ const TableList = ({ handleOpen }) => {
                     <tr key={item.id} className="hover:bg-base-300">
                     <td className="px-4 py-3 whitespace-nowrap">
                         <button
-                        className="text-blue-600 hover:underline"
+                        className="text-blue-600 hover:underline cursor-pointer"
                         onClick={() => handleOpen('view', item)}
                         aria-label={`View details for ${item.title}`}
                         >
