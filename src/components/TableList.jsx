@@ -97,7 +97,7 @@ const TableList = ({ handleOpen }) => {
                     Description
                   </th>
                   <th className="px-4 py-2 text-center">
-                    Upload Status
+                    Status
                   </th>
                   <th className="px-4 py-2 text-center last:rounded-tr-lg">
                     Actions
