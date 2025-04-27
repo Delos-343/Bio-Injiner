@@ -1,56 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { TrashIcon } from '@heroicons/react/24/outline'
-import ReactMarkdown from 'react-markdown'                                       
-import remarkMath from 'remark-math'                                              
-import rehypeKatex from 'rehype-katex'                                            
-import 'katex/dist/katex.min.css'      
-
-/**
- * Modal for adding/editing items, now with document upload.
- *
- * Props:
- * - isOpen (boolean): whether the modal is visible
- * - onClose (function): callback to close modal
- * - mode ("edit"|"view"): determines header and button text
- * - onSubmit (function): receives FormData including the file
- */
+import ReactMarkdown from 'react-markdown'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import 'katex/dist/katex.min.css'
 
 const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
 
-  const fileInputRef = useRef(null);
+  const [title, setTitle] = useState('');
+
+  const [publisher, setPublisher] = useState('');
 
   const [description, setDescription] = useState('');
 
   const [previewMode, setPreviewMode] = useState(false);
+
+  const fileInputRef = useRef(null);                 // ref for file input :contentReference[oaicite:7]{index=7}
 
   useEffect(() => {
 
     document.body.style.overflow = isOpen ? 'hidden' : '';
 
     return () => { document.body.style.overflow = '' };
-    
+
   }, [isOpen]);
 
-  const modalRoot = document.body;
-  
-  if (!modalRoot) return null;
+  // Portal target
+  if (!document.body) return null;
 
   return ReactDOM.createPortal(
     <>
       <input
         type="checkbox"
-        id="my-modal-toggle"
+        id="modal-toggle"
         className="modal-toggle"
         checked={isOpen}
         onChange={onClose}
       />
-      <div
-        className="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-      >
+      <div className="modal" role="dialog" aria-modal="true">
         <div className="modal-box rounded-lg shadow-lg relative">
           {/* Close button */}
           <button
@@ -63,8 +51,8 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
           </button>
 
           {/* Header */}
-          <h3 id="modal-title" className="font-bold text-xl text-center mb-4">
-            {mode === 'edit' ? 'Edit Item' : 'View Details'}
+          <h3 className="font-bold text-xl text-center mb-4">
+            {mode === 'edit' ? 'Edit Item' : 'Item Details'}
           </h3>
 
           {/* Form */}
@@ -88,6 +76,8 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
                 name="title"
                 type="text"
                 className="input input-bordered w-full"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
@@ -104,10 +94,12 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
                 name="publisher"
                 type="text"
                 className="input input-bordered w-full"
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value)}
               />
             </div>
 
-            {/* Description */}
+            {/* Description + LaTeX Preview */}
             <div>
               <label htmlFor="description" className="label my-2">
                 <span className="label-text">
@@ -123,16 +115,13 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
-
-            {/* Render button */}
             <button
               type="button"
               onClick={() => setPreviewMode(!previewMode)}
-              className="btn btn-outline border-accent-content mt-2"
+              className="btn btn-outline mt-2"
             >
               {previewMode ? 'Hide Preview' : 'Render LaTeX'}
             </button>
-
             {previewMode && (
               <div className="prose whitespace-pre-wrap border rounded p-4 mt-2">
                 <ReactMarkdown
@@ -143,12 +132,12 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
               </div>
             )}
 
-            {/* Document Upload w/ Delete */}
+            {/* Document Upload w. Delete */}
             <div className="flex items-center space-x-2">
               <div className="flex-1">
-                <label htmlFor="document" className="label">
+                <label htmlFor="document" className="label my-2">
                   <span className="label-text">
-                    Upload Document (Word or PDF)
+                    Upload Document (Word / PDF)
                   </span>
                 </label>
                 <input
@@ -175,19 +164,26 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
             </div>
 
             {/* Actions */}
-            <div className="modal-action justify-center mt-6">
+            <div className="modal-action justify-center mt-6 space-x-2">
               <button
                 type="submit"
                 className="btn btn-primary btn-outline"
               >
                 {mode === 'edit' ? 'Save' : 'Add Item'}
               </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="btn btn-error btn-outline"
+              >
+                Cancel
+              </button>
             </div>
           </form>
         </div>
       </div>
     </>,
-    modalRoot
+    document.body
   );
 }
 
