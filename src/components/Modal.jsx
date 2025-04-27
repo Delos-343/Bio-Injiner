@@ -61,7 +61,7 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
 
           {/* Header */}
           <h3 id="modal-title" className="font-bold text-xl text-center mb-4">
-            {mode === 'edit' ? 'Edit Item' : 'Item Details'}
+            {mode === 'edit' ? 'Edit Item' : 'View Details'}
           </h3>
 
           {/* Form */}
