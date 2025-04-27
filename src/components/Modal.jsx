@@ -118,12 +118,12 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
             <button
               type="button"
               onClick={() => setPreviewMode(!previewMode)}
-              className="btn btn-outline mt-2"
+              className="btn btn-ghost mt-2"
             >
               {previewMode ? 'Hide Preview' : 'Render LaTeX'}
             </button>
             {previewMode && (
-              <div className="prose whitespace-pre-wrap border rounded p-4 mt-2">
+              <div className="prose whitespace-pre-wrap border border-amber-800 rounded p-4 mt-2">
                 <ReactMarkdown
                   children={description}
                   remarkPlugins={[remarkMath]}
@@ -149,18 +149,20 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
                   className="file-input file-input-bordered w-full"
                 />
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  if (fileInputRef.current) {
-                    fileInputRef.current.value = null        // clear file input :contentReference[oaicite:8]{index=8}
-                  }
-                }}
-                className="btn btn-ghost btn-sm btn-circle"
-                aria-label="Remove uploaded document"
-              >
-                <TrashIcon className="h-5 w-5 text-red-500" />
-              </button>
+              <div className="flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (fileInputRef.current) {
+                      fileInputRef.current.value = null        // clear file input :contentReference[oaicite:8]{index=8}
+                    }
+                  }}
+                  className="btn btn-ghost btn-sm btn-circle w-full h-full p-4"
+                  aria-label="Remove uploaded document"
+                >
+                  <TrashIcon className="h-5 w-5 text-red-500" />
+                </button>
+              </div>
             </div>
 
             {/* Actions */}
