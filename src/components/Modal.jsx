@@ -1,5 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
+import ReactMarkdown from 'react-markdown'                                       
+import remarkMath from 'remark-math'                                              
+import rehypeKatex from 'rehype-katex'                                            
+import 'katex/dist/katex.min.css'      
 
 /**
  * Modal for adding/editing items, now with document upload.
@@ -12,6 +16,10 @@ import ReactDOM from 'react-dom'
  */
 
 const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
+
+  const [description, setDescription] = useState('');
+
+  const [previewMode, setPreviewMode] = useState(false);
 
   useEffect(() => {
 
@@ -108,8 +116,29 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
                 name="description"
                 rows={4}
                 className="textarea textarea-bordered w-full"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
+
+            {/* Render button */}
+            <button
+              type="button"
+              onClick={() => setPreviewMode(!previewMode)}
+              className="btn btn-outline border-accent-content mt-2"
+            >
+              {previewMode ? 'Hide Preview' : 'Render LaTeX'}
+            </button>
+
+            {previewMode && (
+              <div className="prose whitespace-pre-wrap border rounded p-4 mt-2">
+                <ReactMarkdown
+                  children={description}
+                  remarkPlugins={[remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                />
+              </div>
+            )}
 
             {/* Document Upload */}
             <div>
