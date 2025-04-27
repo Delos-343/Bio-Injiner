@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
+import { TrashIcon } from '@heroicons/react/24/outline'
 import ReactMarkdown from 'react-markdown'                                       
 import remarkMath from 'remark-math'                                              
 import rehypeKatex from 'rehype-katex'                                            
@@ -16,6 +17,8 @@ import 'katex/dist/katex.min.css'
  */
 
 const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
+
+  const fileInputRef = useRef(null);
 
   const [description, setDescription] = useState('');
 
@@ -140,20 +143,35 @@ const Modal = ({ isOpen, onClose, mode, onSubmit }) => {
               </div>
             )}
 
-            {/* Document Upload */}
-            <div>
-              <label htmlFor="document" className="label my-2">
-                <span className="label-text">
-                  Upload Document (Word, PDF)
-                </span>
-              </label>
-              <input
-                id="document"
-                name="document"
-                type="file"
-                accept=".pdf,.doc,.docx"
-                className="file-input file-input-bordered w-full"
-              />
+            {/* Document Upload w/ Delete */}
+            <div className="flex items-center space-x-2">
+              <div className="flex-1">
+                <label htmlFor="document" className="label">
+                  <span className="label-text">
+                    Upload Document (Word or PDF)
+                  </span>
+                </label>
+                <input
+                  ref={fileInputRef}                              
+                  id="document"
+                  name="document"
+                  type="file"
+                  accept=".pdf,.doc,.docx"                          
+                  className="file-input file-input-bordered w-full"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = null        // clear file input :contentReference[oaicite:8]{index=8}
+                  }
+                }}
+                className="btn btn-ghost btn-sm btn-circle"
+                aria-label="Remove uploaded document"
+              >
+                <TrashIcon className="h-5 w-5 text-red-500" />
+              </button>
             </div>
 
             {/* Actions */}
