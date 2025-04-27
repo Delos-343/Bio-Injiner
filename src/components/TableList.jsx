@@ -125,19 +125,22 @@ const TableList = ({ handleOpen }) => {
                       {truncateWords(item.description, 13)}
                     </td>
 
-                    {/* Document column */}
-                    <td className="px-4 py-3 text-center whitespace-normal break-words min-w-0">
-                      {item.fileName ? (
-                        <a
-                          href={item.fileURL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline"
+                    {/* Document status */}
+                    <td className="px-4 py-3 text-center">
+                      {item.fileURL ? (
+                        <button
+                          className="btn btn-sm rounded-full w-8 h-8 btn-primary"
+                          aria-label="Document uploaded"
                         >
-                          {item.fileName}
-                        </a>
+                          ✓
+                        </button>
                       ) : (
-                        <span className="text-gray-500">No document</span>
+                        <button
+                          className="btn btn-sm rounded-full w-8 h-8 btn-outline"
+                          aria-label="No document uploaded"
+                        >
+                          ✗
+                        </button>
                       )}
                     </td>
 
